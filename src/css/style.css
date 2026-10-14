@@ -1,22 +1,19 @@
 /* Hush - style.css
    One stylesheet for every page.
-   Colors live in variables at the top. The dark theme just swaps them. */
+   Colors are variables at the top. Dark mode just swaps them. */
 
 :root {
-  --bg: #f4f5fa;
+  --bg: #f5f5f5;
   --surface: #ffffff;
-  --ink: #181b34;
-  --muted: #6a6f8c;
-  --accent: #2a4bff;
-  --line: #e1e3ee;
+  --ink: #111111;
+  --muted: #555555;
+  --accent: #ffd23f;
 }
 [data-theme="dark"] {
-  --bg: #12131c;
-  --surface: #1b1d2a;
-  --ink: #eceef8;
-  --muted: #9a9fbb;
-  --accent: #7b93ff;
-  --line: #2b2e42;
+  --bg: #161616;
+  --surface: #232323;
+  --ink: #f2f2f2;
+  --muted: #aaaaaa;
 }
 
 * { box-sizing: border-box; }
@@ -28,66 +25,49 @@ body {
   color: var(--ink);
   line-height: 1.6;
 }
-h1, h2 { letter-spacing: -0.02em; line-height: 1.15; }
-h1 { margin-top: 0; }
+h1, h2, .logo { font-family: "Courier New", monospace; }
+h1 { margin-top: 0; font-size: 2.2rem; }
+a { color: inherit; }
 
 /* ---------- navigation ---------- */
 nav {
-  position: sticky;
-  top: 0;
-  z-index: 5;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   padding: 10px 24px;
   background: var(--surface);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 2px solid var(--ink);
 }
-nav a { color: var(--muted); text-decoration: none; margin-left: 18px; }
-nav a:hover { color: var(--ink); }
-nav .logo { font-size: 1.4rem; font-weight: 800; color: var(--ink); margin-left: 0; }
-nav .logo::after { content: "."; color: var(--accent); }
 nav div { display: flex; align-items: center; flex-wrap: wrap; }
+nav a { margin-left: 18px; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+nav .logo { font-size: 1.5rem; font-weight: bold; margin-left: 0; }
 
 /* ---------- layout ---------- */
 main { max-width: 620px; margin: 32px auto; padding: 0 16px; }
+.lead { font-size: 1.2rem; }
 
 .card {
   background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-/* ---------- home page ---------- */
-.hero { padding: 48px 0 28px; }
-.hero h1 { font-size: clamp(2.2rem, 7vw, 3.6rem); font-weight: 800; }
-.redact {
-  background: var(--ink);
-  color: transparent;
+  border: 2px solid var(--ink);
   border-radius: 4px;
-  padding: 0 0.15em;
-  margin-left: 0.25em;
-  cursor: default;
-  transition: background 0.3s, color 0.3s;
+  box-shadow: 4px 4px 0 var(--ink);
+  padding: 20px;
+  margin-bottom: 24px;
 }
-.redact:hover { background: transparent; color: var(--accent); }
-.points div { border-top: 1px solid var(--line); padding: 14px 0; }
-.points strong { display: block; }
 
 /* ---------- forms and buttons ---------- */
 label { display: block; margin-top: 14px; font-weight: 600; }
 label.inline { display: inline; margin: 0; font-weight: 400; }
 input[type="text"], input[type="password"], textarea {
   width: 100%;
-  padding: 10px 12px;
+  padding: 8px 10px;
   margin-top: 4px;
-  background: var(--bg);
+  background: var(--surface);
   color: var(--ink);
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
   font-family: inherit;
   font-size: 1rem;
 }
@@ -98,38 +78,38 @@ input[type="checkbox"] { margin-right: 8px; }
 button, .btn {
   display: inline-block;
   background: var(--accent);
-  color: #fff;
-  border: 1px solid var(--accent);
-  border-radius: 8px;
-  padding: 9px 18px;
+  color: #111;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  padding: 8px 18px;
   margin: 12px 8px 0 0;
   font-size: 1rem;
   font-family: inherit;
+  font-weight: 600;
   cursor: pointer;
   text-decoration: none;
 }
-button:hover, .btn:hover { opacity: 0.85; }
-.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
-button.danger { background: #d33; border-color: #d33; }
+.btn.ghost { background: var(--surface); color: var(--ink); }
+button.danger { background: #ff6b6b; }
 button.small {
-  background: none;
-  color: var(--muted);
-  border: 1px solid var(--line);
-  padding: 2px 10px;
+  background: var(--surface);
+  color: var(--ink);
+  padding: 1px 10px;
   margin: 8px 8px 0 0;
   font-size: 0.85rem;
+  font-weight: 400;
 }
-button.small:hover { color: var(--accent); border-color: var(--accent); opacity: 1; }
-button.small.danger { color: #d33; background: none; }
+button.small:hover { background: var(--accent); color: #111; }
+button.small.danger:hover { background: #ff6b6b; }
 nav button.icon {
-  background: none; color: var(--muted); border: none;
+  background: none; color: var(--ink); border: none;
   margin: 0 0 0 14px; padding: 0; font-size: 1.2rem;
 }
 
-a:focus, button:focus, input:focus, textarea:focus { outline: 3px solid #f0b429; }
+a:focus, button:focus, input:focus, textarea:focus { outline: 3px solid #2a7fff; }
 
-/* ---------- posts (a list with lines, not boxes) ---------- */
-.post { display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+/* ---------- posts ---------- */
+.post { display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px dashed var(--muted); }
 .post-body { flex: 1; min-width: 0; }
 .post p { margin: 4px 0 0; overflow-wrap: anywhere; }
 .post small { margin-left: 8px; }
@@ -137,19 +117,17 @@ a:focus, button:focus, input:focus, textarea:focus { outline: 3px solid #f0b429;
 .avatar {
   flex: none;
   width: 42px; height: 42px;
-  border-radius: 50%;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
   background: var(--accent);
-  color: #fff;
-  font-weight: 700;
+  color: #111;
+  font-weight: bold;
   display: flex; align-items: center; justify-content: center;
 }
-.avatar.anon { background: var(--muted); }
+.avatar.anon { background: var(--surface); color: var(--ink); }
 .avatar.big { width: 64px; height: 64px; font-size: 1.6rem; }
-.profile-head { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.profile-head { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
 .profile-head h1 { margin: 0; }
 
 .message { color: #d33; min-height: 1.4em; }
 small { color: var(--muted); }
-footer { text-align: center; padding: 28px; color: var(--muted); font-size: 0.9rem; }
-
-@media (prefers-reduced-motion: reduce) { .redact { transition: none; } }
