@@ -1,86 +1,155 @@
 /* Hush - style.css
    One stylesheet for every page.
-   Colors are saved as variables at the top so they are easy to change. */
+   Colors live in variables at the top. The dark theme just swaps them. */
 
 :root {
-  --bg: #e9eef3;
-  --ink: #17232d;
-  --accent: #2f6f8f;
-  --card: #ffffff;
-  --line: #c9d3dc;
+  --bg: #f4f5fa;
+  --surface: #ffffff;
+  --ink: #181b34;
+  --muted: #6a6f8c;
+  --accent: #2a4bff;
+  --line: #e1e3ee;
+}
+[data-theme="dark"] {
+  --bg: #12131c;
+  --surface: #1b1d2a;
+  --ink: #eceef8;
+  --muted: #9a9fbb;
+  --accent: #7b93ff;
+  --line: #2b2e42;
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Segoe UI", system-ui, sans-serif;
   background: var(--bg);
   color: var(--ink);
   line-height: 1.6;
 }
+h1, h2 { letter-spacing: -0.02em; line-height: 1.15; }
+h1 { margin-top: 0; }
 
-/* ---------- navigation bar ---------- */
+/* ---------- navigation ---------- */
 nav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  padding: 12px 24px;
-  background: var(--ink);
+  padding: 10px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
 }
-nav a { color: #fff; text-decoration: none; margin-left: 16px; }
-nav a:hover { text-decoration: underline; }
-nav .logo { font-size: 1.4rem; font-weight: bold; margin-left: 0; }
+nav a { color: var(--muted); text-decoration: none; margin-left: 18px; }
+nav a:hover { color: var(--ink); }
+nav .logo { font-size: 1.4rem; font-weight: 800; color: var(--ink); margin-left: 0; }
+nav .logo::after { content: "."; color: var(--accent); }
+nav div { display: flex; align-items: center; flex-wrap: wrap; }
 
 /* ---------- layout ---------- */
-main { max-width: 640px; margin: 30px auto; padding: 0 16px; }
-h1 { margin-top: 0; }
+main { max-width: 620px; margin: 32px auto; padding: 0 16px; }
 
 .card {
-  background: var(--card);
+  background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 16px;
-  margin-bottom: 14px;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
+/* ---------- home page ---------- */
+.hero { padding: 48px 0 28px; }
+.hero h1 { font-size: clamp(2.2rem, 7vw, 3.6rem); font-weight: 800; }
+.redact {
+  background: var(--ink);
+  color: transparent;
+  border-radius: 4px;
+  padding: 0 0.15em;
+  margin-left: 0.25em;
+  cursor: default;
+  transition: background 0.3s, color 0.3s;
+}
+.redact:hover { background: transparent; color: var(--accent); }
+.points div { border-top: 1px solid var(--line); padding: 14px 0; }
+.points strong { display: block; }
+
 /* ---------- forms and buttons ---------- */
-label { display: block; margin-top: 10px; font-weight: bold; }
+label { display: block; margin-top: 14px; font-weight: 600; }
+label.inline { display: inline; margin: 0; font-weight: 400; }
 input[type="text"], input[type="password"], textarea {
   width: 100%;
-  padding: 8px;
+  padding: 10px 12px;
   margin-top: 4px;
+  background: var(--bg);
+  color: var(--ink);
   border: 1px solid var(--line);
-  border-radius: 4px;
+  border-radius: 8px;
   font-family: inherit;
   font-size: 1rem;
 }
-input[type="checkbox"] { margin-right: 6px; }
+input[type="checkbox"] { margin-right: 8px; }
+.row { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+#search { margin: 0 0 8px; }
 
 button, .btn {
   display: inline-block;
   background: var(--accent);
   color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
-  margin-top: 12px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 9px 18px;
+  margin: 12px 8px 0 0;
   font-size: 1rem;
+  font-family: inherit;
   cursor: pointer;
   text-decoration: none;
 }
-button:hover, .btn:hover { background: var(--ink); }
-button.danger { background: #a33; }
-button.small { padding: 4px 10px; margin: 8px 8px 0 0; font-size: 0.85rem; }
-
-/* focus outline so keyboard users can see where they are */
-a:focus, button:focus, input:focus, textarea:focus {
-  outline: 3px solid #f0b429;
+button:hover, .btn:hover { opacity: 0.85; }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+button.danger { background: #d33; border-color: #d33; }
+button.small {
+  background: none;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  padding: 2px 10px;
+  margin: 8px 8px 0 0;
+  font-size: 0.85rem;
+}
+button.small:hover { color: var(--accent); border-color: var(--accent); opacity: 1; }
+button.small.danger { color: #d33; background: none; }
+nav button.icon {
+  background: none; color: var(--muted); border: none;
+  margin: 0 0 0 14px; padding: 0; font-size: 1.2rem;
 }
 
-.message { color: #a33; min-height: 1.4em; }
-.hero { text-align: center; padding: 40px 0; }
-small { color: #55656f; }
+a:focus, button:focus, input:focus, textarea:focus { outline: 3px solid #f0b429; }
 
-footer { text-align: center; padding: 20px; color: #55656f; }
+/* ---------- posts (a list with lines, not boxes) ---------- */
+.post { display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.post-body { flex: 1; min-width: 0; }
+.post p { margin: 4px 0 0; overflow-wrap: anywhere; }
+.post small { margin-left: 8px; }
+
+.avatar {
+  flex: none;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.avatar.anon { background: var(--muted); }
+.avatar.big { width: 64px; height: 64px; font-size: 1.6rem; }
+.profile-head { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.profile-head h1 { margin: 0; }
+
+.message { color: #d33; min-height: 1.4em; }
+small { color: var(--muted); }
+footer { text-align: center; padding: 28px; color: var(--muted); font-size: 0.9rem; }
+
+@media (prefers-reduced-motion: reduce) { .redact { transition: none; } }
