@@ -1,4 +1,4 @@
-# 🤫 Hush
+# Hush
 
 **A quiet social media prototype. No tracking, no ads, no AI reading your posts.**
 
