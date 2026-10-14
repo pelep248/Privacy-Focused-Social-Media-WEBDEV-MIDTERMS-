@@ -51,8 +51,16 @@ function buildNav() {
     html += '<a href="' + base + 'pages/login.html">Log in</a>';
     html += '<a href="' + base + 'pages/signup.html">Sign up</a>';
   }
+  html += '<button id="themeBtn" class="icon" title="Switch light/dark">◐</button>';
   html += "</div>";
   document.getElementById("nav").innerHTML = html;
+
+  /* dark mode: save the choice so it stays on every page */
+  document.getElementById("themeBtn").addEventListener("click", function () {
+    const dark = document.documentElement.dataset.theme === "dark";
+    document.documentElement.dataset.theme = dark ? "light" : "dark";
+    localStorage.setItem("theme", dark ? "light" : "dark");
+  });
 
   const logout = document.getElementById("logout");
   if (logout) {
@@ -133,19 +141,27 @@ function showPosts(listId, posts) {
   list.innerHTML = "";
 
   if (posts.length === 0) {
-    list.innerHTML = "<p>No posts yet.</p>";
+    list.innerHTML = "<p><small>Nothing here yet.</small></p>";
     return;
   }
 
   posts.forEach(function (post) {
-    const card = document.createElement("div");
-    card.className = "card";
+    const item = document.createElement("div");
+    item.className = "post";
+
+    /* round avatar with the first letter of the name */
+    const avatar = document.createElement("div");
+    avatar.className = post.anon ? "avatar anon" : "avatar";
+    avatar.textContent = post.anon ? "?" : post.author[0].toUpperCase();
+
+    const body = document.createElement("div");
+    body.className = "post-body";
 
     const who = document.createElement("strong");
     who.textContent = post.anon ? "Anonymous" : post.author;
 
     const time = document.createElement("small");
-    time.textContent = "  " + post.time;
+    time.textContent = post.time;
 
     const text = document.createElement("p");
     text.textContent = post.text;
@@ -155,7 +171,7 @@ function showPosts(listId, posts) {
     likeBtn.textContent = "Like (" + post.likes + ")";
     likeBtn.addEventListener("click", function () { likePost(post.id); });
 
-    card.append(who, time, text, likeBtn);
+    body.append(who, time, text, likeBtn);
 
     /* only the owner of a post can delete it */
     if (post.author === getCurrentUser()) {
@@ -163,10 +179,11 @@ function showPosts(listId, posts) {
       delBtn.className = "small danger";
       delBtn.textContent = "Delete";
       delBtn.addEventListener("click", function () { deletePost(post.id); });
-      card.append(delBtn);
+      body.append(delBtn);
     }
 
-    list.append(card);
+    item.append(avatar, body);
+    list.append(item);
   });
 }
 
@@ -208,13 +225,27 @@ function setupFeed() {
     location.reload();
   });
 
-  /* hide posts from private accounts (except your own) */
-  const visible = getPosts().filter(function (p) {
-    const author = findUser(p.author);
-    const isPrivate = author && author.isPrivate;
-    return !isPrivate || p.author === getCurrentUser();
+  /* character counter under the post box */
+  const box = document.getElementById("postText");
+  box.addEventListener("input", function () {
+    document.getElementById("count").textContent = box.value.length + " / 280";
   });
-  showPosts("feedList", visible);
+
+  /* show the posts, filtered by the search box.
+     posts from private accounts are hidden (except your own) */
+  const search = document.getElementById("search");
+  function drawFeed() {
+    const word = search.value.toLowerCase();
+    const visible = getPosts().filter(function (p) {
+      const author = findUser(p.author);
+      const isPrivate = author && author.isPrivate;
+      const allowed = !isPrivate || p.author === getCurrentUser();
+      return allowed && p.text.toLowerCase().includes(word);
+    });
+    showPosts("feedList", visible);
+  }
+  search.addEventListener("input", drawFeed);
+  drawFeed();
 }
 
 /* ===== 7. profile ===== */
@@ -238,6 +269,8 @@ function setupProfile() {
 
   const mine = getPosts().filter(function (p) { return p.author === me.username; });
   showPosts("myPosts", mine);
+  document.getElementById("bigAvatar").textContent = me.username[0].toUpperCase();
+  document.getElementById("postCount").textContent = mine.length + " posts";
 }
 
 /* ===== 8. settings ===== */
@@ -274,6 +307,10 @@ function setupSettings() {
 }
 
 /* ===== 9. start: run the right code for the current page ===== */
+
+if (localStorage.getItem("theme") === "dark") {
+  document.documentElement.dataset.theme = "dark";
+}
 
 protectPage();
 buildNav();
