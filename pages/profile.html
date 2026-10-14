@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profile | Hush</title>
+  <link rel="stylesheet" href="../src/css/style.css">
+</head>
+<body data-page="profile" data-base="../">
+  <nav id="nav"></nav>
+  <main>
+    <div class="card">
+      <h1 id="profileName"></h1>
+      <form id="bioForm">
+        <label for="bio">Bio</label>
+        <textarea id="bio" rows="3"></textarea>
+        <p id="message" class="message"></p>
+        <button type="submit">Save bio</button>
+      </form>
+    </div>
+    <h2>My posts</h2>
+    <div id="myPosts"></div>
+  </main>
+  <footer>Hush: a school project. Nothing you type leaves your browser.</footer>
+  <script src="../src/js/main.js"></script>
+</body>
+</html>

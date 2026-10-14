@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feed | Hush</title>
+  <link rel="stylesheet" href="../src/css/style.css">
+</head>
+<body data-page="feed" data-base="../">
+  <nav id="nav"></nav>
+  <main>
+    <h1>Feed</h1>
+    <div class="card">
+      <form id="postForm">
+        <label for="postText">What do you want to say?</label>
+        <textarea id="postText" rows="3"></textarea>
+        <label><input type="checkbox" id="anon">Post anonymously</label>
+        <button type="submit">Post</button>
+      </form>
+    </div>
+    <div id="feedList"></div>
+  </main>
+  <footer>Hush: a school project. Nothing you type leaves your browser.</footer>
+  <script src="../src/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign up | Hush</title>
+  <link rel="stylesheet" href="../src/css/style.css">
+</head>
+<body data-page="signup" data-base="../">
+  <nav id="nav"></nav>
+  <main>
+    <div class="card">
+      <h1>Sign up</h1>
+      <p>You only need a username and a password. No email, no phone number.</p>
+      <form id="signupForm">
+        <label for="username">Username</label>
+        <input type="text" id="username">
+        <label for="password">Password (6+ characters)</label>
+        <input type="password" id="password">
+        <label for="confirm">Confirm password</label>
+        <input type="password" id="confirm">
+        <p id="message" class="message"></p>
+        <button type="submit">Create account</button>
+      </form>
+      <p>Already have an account? <a href="login.html">Log in</a></p>
+    </div>
+  </main>
+  <footer>Hush: a school project. Nothing you type leaves your browser.</footer>
+  <script src="../src/js/main.js"></script>
+</body>
+</html>
