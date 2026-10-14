@@ -141,7 +141,7 @@ function showPosts(listId, posts) {
   list.innerHTML = "";
 
   if (posts.length === 0) {
-    list.innerHTML = "<p><small>Nothing here yet.</small></p>";
+    list.innerHTML = "<p>No posts yet.</p>";
     return;
   }
 
