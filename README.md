@@ -85,29 +85,9 @@ No installing and no internet needed.
 - Posts are shown using `textContent` and not `innerHTML`, so someone cannot
   put code inside a post.
 
-## Limitations
-
-- Data only exists in one browser on one computer. Two people cannot see each
-  other's posts unless they use the same browser.
-- Passwords are saved as plain text in localStorage. This is okay for a school
-  prototype but a real app would need a backend and hashed passwords.
-- Clearing the browser data deletes all accounts and posts.
-
-## What I could add later
-
-- Comments on posts
-- Profile pictures (using the `assets/img/` folder)
-- Search for users and posts
-
 ## Submitted by
 
 Philip Andree C. Tupas  
 DS3A
-
-## Use of AI
-
-(Write honestly here what you did yourself and what AI helped with.)
-
----
 
 *Made for the DS315 Web Development midterm. Built with HTML, CSS and JavaScript only.*
