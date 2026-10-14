@@ -12,15 +12,17 @@
     <h1>Feed</h1>
     <div class="card">
       <form id="postForm">
-        <label for="postText">What do you want to say?</label>
-        <textarea id="postText" rows="3"></textarea>
-        <label><input type="checkbox" id="anon">Post anonymously</label>
+        <textarea id="postText" rows="3" maxlength="280" placeholder="What's on your mind?"></textarea>
+        <div class="row">
+          <label class="inline"><input type="checkbox" id="anon">Post anonymously</label>
+          <small id="count">0 / 280</small>
+        </div>
         <button type="submit">Post</button>
       </form>
     </div>
+    <input type="text" id="search" placeholder="Search posts">
     <div id="feedList"></div>
   </main>
-  <footer>Hush: a school project. Nothing you type leaves your browser.</footer>
   <script src="../src/js/main.js"></script>
 </body>
 </html>
